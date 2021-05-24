@@ -1,6 +1,18 @@
 version: '3.7'
 
 services:
+
+  configserver:
+    image: ostock/configserver:0.0.1-SNAPSHOT
+    ports:
+      - "8071:8071"
+    networks:
+      backend:
+        aliases:
+          - "configserver"
+    healthcheck:
+      test: "exit 0"
+
   licensingservice:
     image: ostock/licensing-service:0.0.1-SNAPSHOT
 
@@ -15,6 +27,9 @@ services:
       backend:
         aliases:
           - "licenseservice"
+    depends_on:
+      configserver:
+        condition: service_healthy
 
 networks:
   backend:
