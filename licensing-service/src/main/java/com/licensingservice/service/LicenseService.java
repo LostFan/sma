@@ -1,6 +1,6 @@
-package com.service;
+package com.licensingservice.service;
 
-import com.domain.License;
+import com.licensingservice.domain.License;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 

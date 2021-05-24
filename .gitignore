@@ -1,2 +1,4 @@
 # Project exclude paths
 /licensing-service/target/
+/configserver/target/
+/.idea/

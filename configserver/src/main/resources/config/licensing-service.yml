@@ -1,0 +1,28 @@
+example:
+  property: I AM THE DEFAULT
+
+spring:
+  database:
+    driverClassName: org.h2.Driver
+  datasource:
+    platform: all
+    testWhileIdle: true
+    validationQuery: SELECT 1
+  jpa:
+    database: h2
+    hibernate:
+      ddl-auto: none
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
+
+management:
+  endpoints:
+    enabled-by-default: true
+    web:
+      exposure:
+        include: '*'
+
+

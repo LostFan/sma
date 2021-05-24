@@ -1,7 +1,7 @@
-package com.controller;
+package com.licensingservice.controller;
 
-import com.domain.License;
-import com.service.LicenseService;
+import com.licensingservice.domain.License;
+import com.licensingservice.service.LicenseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

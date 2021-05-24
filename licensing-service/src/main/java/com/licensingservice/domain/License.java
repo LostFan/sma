@@ -1,4 +1,4 @@
-package com.domain;
+package com.licensingservice.domain;
 
 import lombok.Getter;
 import lombok.Setter;

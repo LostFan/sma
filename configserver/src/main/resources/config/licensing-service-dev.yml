@@ -1,0 +1,9 @@
+example:
+  property: I AM DEV
+spring:
+  datasource:
+    password: ''
+    url: jdbc:h2:file:./ostock_dev
+    username: sa
+    data: classpath:script/data.sql
+    schema: classpath:script/init.sql
