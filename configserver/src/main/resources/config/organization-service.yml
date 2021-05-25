@@ -18,6 +18,9 @@ spring:
         dialect: org.hibernate.dialect.H2Dialect
     show-sql: true
 
+server:
+  port: 8081
+
 management:
   endpoints:
     enabled-by-default: true
