@@ -13,6 +13,18 @@ services:
     healthcheck:
       test: "exit 0"
 
+  eurekaserver:
+    image: ostock/eurekaserver:0.0.1-SNAPSHOT
+    ports:
+      - "8070:8070"
+    networks:
+      backend:
+        aliases:
+          - "eurekaserver"
+    depends_on:
+      configserver:
+        condition: service_healthy
+
   licensingservice:
     image: ostock/licensing-service:0.0.1-SNAPSHOT
 
@@ -27,6 +39,24 @@ services:
       backend:
         aliases:
           - "licenseservice"
+    depends_on:
+      configserver:
+        condition: service_healthy
+
+  organizationservice:
+    image: ostock/organization-service:0.0.1-SNAPSHOT
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      SPRING_PROFILES_ACTIVE: "dev"
+      SPRING_CLOUD_CONFIG_URI: http://configserver:8071
+
+    networks:
+      backend:
+        aliases:
+          - "organizationservice"
     depends_on:
       configserver:
         condition: service_healthy
