@@ -10,6 +10,7 @@ import com.licensingservice.service.client.factory.OrganizationClientType;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
 import java.util.UUID;
 
 @Service
@@ -33,7 +34,7 @@ public class LicenseService {
         if (null == license) {
             throw new IllegalArgumentException(
                     String.format(messages.getMessage(
-                            "license.search.error.message", null, null),
+                            "license.search.error.message", null, Locale.ENGLISH),
                             licenseId, organizationId));
         }
         return license.withComment(config.getProperty());
@@ -44,7 +45,7 @@ public class LicenseService {
                 (organizationId, licenseId);
         if (null == license) {
             throw new IllegalArgumentException(String.format(
-                    messages.getMessage("license.search.error.message", null, null),
+                    messages.getMessage("license.search.error.message", null, Locale.ENGLISH),
                     licenseId, organizationId));
         }
         OrganizationClient organizationClient = organizationClientFactory.getOrganizationClient(organizationClientType);

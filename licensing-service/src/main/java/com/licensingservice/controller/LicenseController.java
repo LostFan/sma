@@ -51,8 +51,7 @@ public class LicenseController {
             @PathVariable("organizationId") String organizationId,
             @PathVariable("licenseId") String licenseId,
             @PathVariable("clientType") OrganizationClientType organizationClientType) {
-        return licenseService.getLicense(organizationId,
-                licenseId, organizationClientType);
+        return licenseService.getLicense(licenseId, organizationId, organizationClientType);
     }
 
     @PutMapping

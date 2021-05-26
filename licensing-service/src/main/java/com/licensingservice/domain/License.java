@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Getter @Setter @ToString
 @Entity
-@Table(name = "licenses")
+@Table(name = "license")
 public class License extends RepresentationModel<License> {
     @Id
     @Column(name = "license_id", nullable = false)

@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @Service("discoveryClientBean")
-public class OrganizationDiscoveryClient {
+public class OrganizationDiscoveryClient implements OrganizationClient{
 
     private final DiscoveryClient discoveryClient;
 
