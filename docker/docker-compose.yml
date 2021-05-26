@@ -2,6 +2,18 @@ version: '3.7'
 
 services:
 
+  database:
+    build: .
+    ports:
+      - "81:81"
+      - "1521:1521"
+    networks:
+      backend:
+        aliases:
+          - "database"
+    healthcheck:
+      test: "exit 0"
+
   configserver:
     image: ostock/configserver:0.0.1-SNAPSHOT
     ports:

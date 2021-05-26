@@ -3,7 +3,5 @@ example:
 spring:
   datasource:
     password: ''
-    url: jdbc:h2:file:./ostock_dev
+    url: jdbc:h2:tcp://database:1521/ostock_dev;INIT=RUNSCRIPT FROM '/opt/h2-data/init.sql'
     username: sa
-    data: classpath:script/data.sql
-    schema: classpath:script/init.sql
