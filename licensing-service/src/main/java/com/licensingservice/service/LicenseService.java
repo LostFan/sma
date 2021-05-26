@@ -5,6 +5,7 @@ import com.licensingservice.domain.License;
 import com.licensingservice.domain.Organization;
 import com.licensingservice.repository.LicenseRepository;
 import com.licensingservice.service.client.OrganizationClient;
+import com.licensingservice.service.client.OrganizationFeignClient;
 import com.licensingservice.service.client.factory.OrganizationClientFactory;
 import com.licensingservice.service.client.factory.OrganizationClientType;
 import org.springframework.context.MessageSource;
@@ -20,12 +21,14 @@ public class LicenseService {
     private final LicenseRepository licenseRepository;
     private final ServiceConfig config;
     private final OrganizationClientFactory organizationClientFactory;
+    private final OrganizationFeignClient organizationFeignClient;
 
-    public LicenseService(MessageSource messages, LicenseRepository licenseRepository, ServiceConfig config, OrganizationClientFactory organizationClientFactory) {
+    public LicenseService(MessageSource messages, LicenseRepository licenseRepository, ServiceConfig config, OrganizationClientFactory organizationClientFactory, OrganizationFeignClient organizationFeignClient) {
         this.messages = messages;
         this.licenseRepository = licenseRepository;
         this.config = config;
         this.organizationClientFactory = organizationClientFactory;
+        this.organizationFeignClient = organizationFeignClient;
     }
 
     public License getLicense(String licenseId, String organizationId){
@@ -48,9 +51,13 @@ public class LicenseService {
                     messages.getMessage("license.search.error.message", null, Locale.ENGLISH),
                     licenseId, organizationId));
         }
-        OrganizationClient organizationClient = organizationClientFactory.getOrganizationClient(organizationClientType);
-
-        Organization organization = organizationClient.getOrganization(organizationId);
+        Organization organization;
+        if (OrganizationClientType.FEIGN.equals(organizationClientType)) {
+            organization = organizationFeignClient.getOrganization(organizationId);
+        } else {
+            OrganizationClient organizationClient = organizationClientFactory.getOrganizationClient(organizationClientType);
+            organization = organizationClient.getOrganization(organizationId);
+        }
         if (null != organization) {
             license.setOrganizationName(organization.getName());
             license.setContactName(organization.getContactName());
