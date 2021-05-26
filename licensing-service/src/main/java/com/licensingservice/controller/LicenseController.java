@@ -2,6 +2,7 @@ package com.licensingservice.controller;
 
 import com.licensingservice.domain.License;
 import com.licensingservice.service.LicenseService;
+import com.licensingservice.service.client.factory.OrganizationClientType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,6 +43,16 @@ public class LicenseController {
                         .withRel("deleteLicense"));
 
         return ResponseEntity.ok(license);
+    }
+
+    @RequestMapping(value="/{licenseId}/{clientType}",
+            method = RequestMethod.GET)
+    public License getLicensesWithClient(
+            @PathVariable("organizationId") String organizationId,
+            @PathVariable("licenseId") String licenseId,
+            @PathVariable("clientType") OrganizationClientType organizationClientType) {
+        return licenseService.getLicense(organizationId,
+                licenseId, organizationClientType);
     }
 
     @PutMapping
