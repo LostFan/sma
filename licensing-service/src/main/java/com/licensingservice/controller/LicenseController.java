@@ -3,8 +3,11 @@ package com.licensingservice.controller;
 import com.licensingservice.domain.License;
 import com.licensingservice.service.LicenseService;
 import com.licensingservice.service.client.factory.OrganizationClientType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import utils.UserContextHolder;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -16,6 +19,9 @@ import java.util.concurrent.TimeoutException;
 @RestController
 @RequestMapping(value = "v1/organization/{organizationId}/license")
 public class LicenseController {
+
+    private static final Logger LOGGER =
+            LoggerFactory.getLogger(LicenseController.class);
 
     private final LicenseService licenseService;
 
@@ -85,6 +91,8 @@ public class LicenseController {
 
     @GetMapping
     public List<License> getLicensesByOrgId(@PathVariable("organizationId") String orgId) throws TimeoutException {
+        LOGGER.debug("LicenseServiceController Correlation id: {}",
+                UserContextHolder.getContext().getCorrelationId());
         return licenseService.getLicensesByOrganization(orgId);
     }
 }
