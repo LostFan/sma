@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeoutException;
 
 @RestController
 @RequestMapping(value = "v1/organization/{organizationId}/license")
@@ -79,5 +81,10 @@ public class LicenseController {
 
         return ResponseEntity.ok(licenseService
                 .deleteLicense(licenseId));
+    }
+
+    @GetMapping
+    public List<License> getLicensesByOrgId(@PathVariable("organizationId") String orgId) throws TimeoutException {
+        return licenseService.getLicensesByOrganization(orgId);
     }
 }
