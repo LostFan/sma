@@ -3,5 +3,6 @@
 /configserver/target/
 /organization-service/target/
 /eurekaserver/target/
+/gatewayserver/target/
 /.idea/
 /ostock_dev.mv.db
