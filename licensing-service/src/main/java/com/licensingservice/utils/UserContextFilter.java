@@ -1,4 +1,4 @@
-package utils;
+package com.licensingservice.utils;
 
 import java.io.IOException;
 
