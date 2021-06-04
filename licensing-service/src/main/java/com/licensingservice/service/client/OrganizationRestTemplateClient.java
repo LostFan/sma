@@ -1,6 +1,7 @@
 package com.licensingservice.service.client;
 
 import com.licensingservice.domain.Organization;
+import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ public class OrganizationRestTemplateClient implements OrganizationClient {
 
     private final RestTemplate restTemplate;
 
-    public OrganizationRestTemplateClient(RestTemplate restTemplate) {
+    public OrganizationRestTemplateClient(KeycloakRestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 

@@ -37,3 +37,13 @@ eureka:
     serviceUrl:
       defaultZone: http://eurekaserver:8070/eureka/
 
+keycloak:
+  realm: sma-realm
+  auth-server-url: http://keycloak:8080/auth
+  ssl-required: external
+  resource: ostock
+  credentials:
+    secret: 9e061e4d-55e5-4b71-bfef-99b38a72964f
+  use-resource-role-mappings: true
+  bearer-only: true
+
