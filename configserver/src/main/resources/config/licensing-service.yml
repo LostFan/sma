@@ -17,6 +17,20 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
     show-sql: true
+  cloud:
+    lodabalancer:
+      ribbon:
+        enabled: false
+    stream:
+      bindings:
+        input:
+          destination: orgChangeTopic
+          content-type: application/json
+          grpup: licensingGroup
+      kafka:
+        binder:
+          zkNodes: kafka
+          brokers: kafka
 
 management:
   endpoints:

@@ -1,12 +1,18 @@
 package com.licensingservice;
 
+import com.licensingservice.events.model.OrganizationChangeModel;
 import com.licensingservice.utils.UserContextInterceptor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
@@ -21,11 +27,14 @@ import java.util.Locale;
 @RefreshScope
 @EnableDiscoveryClient
 @EnableFeignClients
+@EnableBinding(Sink.class)
 public class LicenseServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(LicenseServiceApplication.class, args);
     }
+
+    public static final Logger LOGGER = LoggerFactory.getLogger(LicenseServiceApplication.class);
 
     @Bean
     public LocaleResolver localeResolver() {
@@ -51,5 +60,11 @@ public class LicenseServiceApplication {
         interceptors.add(new UserContextInterceptor());
         restTemplate.setInterceptors(interceptors);
         return restTemplate;
+    }
+
+    @StreamListener(Sink.INPUT)
+    public void loggerSink(OrganizationChangeModel orgChange) {
+        LOGGER.debug("Received an {} event for organization id {}",
+                orgChange.getAction(), orgChange.getOrganizationId());
     }
 }

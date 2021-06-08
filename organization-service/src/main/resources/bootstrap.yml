@@ -6,3 +6,8 @@ spring:
   cloud:
     config:
       uri: http://configserver:8071
+
+logging:
+  level:
+    org.springframework.web: WARN
+    com.organization: DEBUG
