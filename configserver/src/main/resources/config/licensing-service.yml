@@ -26,7 +26,7 @@ spring:
         input:
           destination: orgChangeTopic
           content-type: application/json
-          grpup: licensingGroup
+          group: licensingGroup
       kafka:
         binder:
           zkNodes: kafka
@@ -57,5 +57,9 @@ keycloak:
     secret: 9e061e4d-55e5-4b71-bfef-99b38a72964f
   use-resource-role-mappings: true
   bearer-only: true
+
+redis:
+  server: redis
+  port: 6739
 
 
