@@ -30,6 +30,9 @@ spring:
         binder:
           zkNodes: kafka
           brokers: kafka
+    sleuth:
+      sampler:
+        percentage: 1
 
 server:
   port: 8081

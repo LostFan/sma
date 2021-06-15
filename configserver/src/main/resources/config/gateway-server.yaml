@@ -30,6 +30,9 @@ spring:
           filters:
             - RewritePath=/license/(?<path>.*), /$\{path}
             - RemoveRequestHeader= Cookie,Set-Cookie
+    sleuth:
+      sampler:
+        percentage: 1
 
 management:
   endpoints:
