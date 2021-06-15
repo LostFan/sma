@@ -31,6 +31,9 @@ spring:
         binder:
           zkNodes: kafka
           brokers: kafka
+    sleuth:
+      sampler:
+        percentage: 1
 
 management:
   endpoints:
